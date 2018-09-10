@@ -2,8 +2,8 @@
 public class Square extends Shape{
 	private double height, width;
 	
-	Square(double x, double y, double height, double width){
-		super(x, y);
+	Square(double x, double y, double width, double height){
+		super(x, y, width, height);
 		this.height = height;
 		this.width = width;
 	}

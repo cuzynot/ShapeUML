@@ -1,8 +1,8 @@
 
 public class Enemy extends Square implements Moveable{
 	
-	Enemy(double x, double y, double height, double width){
-		super(x, y, height, width);
+	Enemy(double x, double y, double width, double height){
+		super(x, y, width, height);
 	}
 	
 	@Override

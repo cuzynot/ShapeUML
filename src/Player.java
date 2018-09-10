@@ -1,6 +1,10 @@
 
 public class Player extends Circle implements Moveable, Scalable{
 
+	Player(double x, double y, double radius) {
+		super(x, y, radius);
+	}
+
 	@Override
 	public void grow() {
 		setRadius(getRadius() + 20);

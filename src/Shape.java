@@ -4,7 +4,7 @@ abstract public class Shape {
 	private double x,y;
 	private Rectangle boundingBox = new Rectangle();
 	
-	Shape(int x, int y){
+	Shape(double x, double y){
 		this.x = x;
 		this.y = y;
 	}

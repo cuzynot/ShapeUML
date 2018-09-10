@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 
 
 class ShapeGame extends JFrame { 
-	
+
 	// create player and enemies
 	Player p;
 	ArrayList<Enemy> enemies;
@@ -20,6 +20,9 @@ class ShapeGame extends JFrame {
 	//class variables
 	static JFrame window;
 	JPanel gamePanel;
+
+	// key listener
+	MyKeyListener keyListener;
 
 
 	//Main
@@ -33,11 +36,14 @@ class ShapeGame extends JFrame {
 		super("My Game");  
 
 		//create enemies and player
-		p = new Player();
+		p = new Player(0, 0, 50);
 
 		//spawn 5 enemies
+		int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
+		int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
 		enemies = new ArrayList<Enemy>();
-		
+		enemies.add(new Enemy(randNum(50, width), randNum(50, height), 30, 30));
+
 
 		// Set the frame to full screen 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -51,38 +57,59 @@ class ShapeGame extends JFrame {
 		gamePanel = new GameAreaPanel();
 		this.add(new GameAreaPanel());
 
-		MyKeyListener keyListener = new MyKeyListener();
+		keyListener = new MyKeyListener();
 		this.addKeyListener(keyListener);
 
 		this.requestFocusInWindow(); //make sure the frame has focus   
 		this.setVisible(true);
-		
+
 		while (true) {
 			try {
 				Thread.sleep(20);
 			} catch (InterruptedException e) {}
-			
-			if (keyListener.pressedW) {
-				p.moveUp();
-			}
-			if (keyListener.pressedA) {
-				p.moveLeft();
-			}
-			if (keyListener.pressedS) {
-				p.moveDown();
-			}
-			if (keyListener.pressedD) {
-				p.moveRight();
-			}
-			
-			int randMovement = (int) (Math.random() * 4);
-			
-			
+
+			playerMovement();
+
+
 			repaint();
 		}
 
 
 	} //End of Constructor
+	
+	double randNum(int min, int max) {
+		return Math.random() * max + min;
+	}
+
+	void playerMovement() {
+		if (keyListener.pressedW) {
+			p.moveUp();
+		}
+		if (keyListener.pressedA) {
+			p.moveLeft();
+		}
+		if (keyListener.pressedS) {
+			p.moveDown();
+		}
+		if (keyListener.pressedD) {
+			p.moveRight();
+		}
+	}
+
+	void enemyMovement() {
+		for (Enemy e : enemies) {
+			int rand = (int) (randNum(0, 4));
+			if (rand == 0) {
+				e.moveUp();
+			} else if (rand == 1) {
+				e.moveLeft();
+			} else if (rand == 2) {
+				e.moveDown();
+			} else {
+				e.moveRight();
+			}
+		}
+	}
 
 
 
@@ -98,7 +125,9 @@ class ShapeGame extends JFrame {
 
 
 			//check for collision
-
+//			for (Enemy e : enemies) {
+//				if ()
+//			}
 
 
 
@@ -110,8 +139,7 @@ class ShapeGame extends JFrame {
 
 			//draw player circle
 			g.setColor(Color.BLUE);
-			// g.fillOval(200,200,20,20); 
-			g.fillOval((int)(p.x), (int)(p.y), 50, 50); 
+			g.fillOval((int)(p.getX()), (int)(p.getY()), 50, 50); 
 
 			//repaint();
 		}

@@ -1,24 +1,21 @@
 //Graphics &GUI imports
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import java.awt.Toolkit;
-import java.awt.Graphics;
 import java.awt.Color;
-
+import java.awt.Graphics;
+import java.awt.Toolkit;
 //Keyboard imports
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
-
-//Util
 import java.util.ArrayList;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 
 class ShapeGame extends JFrame { 
 	
 	// create player and enemies
 	Player p;
-	Enemy[] enemies = new Enemy[5];
+	ArrayList<Enemy> enemies;
 
 	//class variables
 	static JFrame window;
@@ -39,6 +36,8 @@ class ShapeGame extends JFrame {
 		p = new Player();
 
 		//spawn 5 enemies
+		enemies = new ArrayList<Enemy>();
+		
 
 		// Set the frame to full screen 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -64,17 +63,20 @@ class ShapeGame extends JFrame {
 			} catch (InterruptedException e) {}
 			
 			if (keyListener.pressedW) {
-				p.y -= 10;
+				p.moveUp();
 			}
 			if (keyListener.pressedA) {
-				p.x -= 10;
+				p.moveLeft();
 			}
 			if (keyListener.pressedS) {
-				p.y += 10;
+				p.moveDown();
 			}
 			if (keyListener.pressedD) {
-				p.x += 10;
+				p.moveRight();
 			}
+			
+			int randMovement = (int) (Math.random() * 4);
+			
 			
 			repaint();
 		}
@@ -103,13 +105,13 @@ class ShapeGame extends JFrame {
 
 			//draw all squares
 			g.setColor(Color.RED);
-			g.fillRect(50, 50, 100, 100);
+			g.fillRect(50, 50, 30, 30);
 
 
 			//draw player circle
 			g.setColor(Color.BLUE);
 			// g.fillOval(200,200,20,20); 
-			g.fillOval((int)(p.x), (int)(p.y), 20, 20); 
+			g.fillOval((int)(p.x), (int)(p.y), 50, 50); 
 
 			//repaint();
 		}

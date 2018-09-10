@@ -33,16 +33,18 @@ class ShapeGame extends JFrame {
 
 	//Constructor - this runs first
 	ShapeGame() { 
-		super("My Game");  
+		super("My Game");
+		this.requestFocusInWindow(); //make sure the frame has focus   
+		this.setVisible(true);
 
 		//create enemies and player
 		p = new Player(0, 0, 50);
 
 		//spawn 5 enemies
-		int screenWidth = Toolkit.getDefaultToolkit().getScreenSize().width;
-		int screenHeight = Toolkit.getDefaultToolkit().getScreenSize().height;
+		int screenWidth = (int)(Toolkit.getDefaultToolkit().getScreenSize().getWidth());
+		int screenHeight = (int)(Toolkit.getDefaultToolkit().getScreenSize().getHeight());
 		enemies = new ArrayList<Enemy>();
-		enemies.add(new Enemy(randNum(50, width), randNum(50, height), 30, 30));
+		enemies.add(new Enemy(randNum(50, screenWidth), randNum(50, screenHeight), 30, 30));
 
 
 		// Set the frame to full screen 
@@ -59,9 +61,6 @@ class ShapeGame extends JFrame {
 
 		keyListener = new MyKeyListener();
 		this.addKeyListener(keyListener);
-
-		this.requestFocusInWindow(); //make sure the frame has focus   
-		this.setVisible(true);
 
 		while (true) {
 			try {

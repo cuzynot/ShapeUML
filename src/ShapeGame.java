@@ -119,7 +119,7 @@ class ShapeGame extends JFrame {
 	void collision() {
 		for (int i = 0; i < enemies.size(); i++) {
 			Enemy e = enemies.get(i);
-			if (Math.abs(e.getX() - p.getX()) < 20 && Math.abs(e.getY() - p.getY()) < 20) {
+			if (p.getBoundingBox().intersects(e.getBoundingBox())) {
 				enemies.remove(e);
 				p.grow();
 				i--;

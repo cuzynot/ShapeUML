@@ -18,21 +18,25 @@ public class Player extends Circle implements Moveable, Scalable{
 	@Override
 	public void moveUp() {
 		setY(getY() - 10);
+		getBoundingBox().setBounds((int)(getX()), (int)(getY()), (int)(getRadius()), (int)(getRadius()));
 	}
 
 	@Override
 	public void moveDown() {
 		setY(getY() + 10);
+		getBoundingBox().setBounds((int)(getX()), (int)(getY()), (int)(getRadius()), (int)(getRadius()));
 	}
 
 	@Override
 	public void moveLeft() {
 		setX(getX() - 10);
+		getBoundingBox().setBounds((int)(getX()), (int)(getY()), (int)(getRadius()), (int)(getRadius()));
 	}
 
 	@Override
 	public void moveRight() {
 		setX(getX() + 10);
+		getBoundingBox().setBounds((int)(getX()), (int)(getY()), (int)(getRadius()), (int)(getRadius()));
 	}
 	
 }
